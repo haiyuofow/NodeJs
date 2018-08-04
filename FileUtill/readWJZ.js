@@ -1,5 +1,6 @@
 
 //NodeJS读取excel中的内容并写入数据库中
+var fs = require("fs");
 var xl = require('node-xlrd');
 var xlsx = require('node-xlsx');
 var moment = require('Moment');
@@ -13,9 +14,6 @@ var connection = mysql.createConnection({
 parser = {};
 
 
-
-var add = '/Users/henry/Downloads/wjz_userdata_7A8C0EEB0D6D5F622466604CAA751713_2018-08-03.xls'
-var add1 ='/Users/henry/Downloads/消费记录20110101-20180615.xlsx'
 
 /**
  * 这是解析xls文件转换为数据库的文件
@@ -154,6 +152,17 @@ parser.parse_caiwu_xlsx=function(tmp){
 // console.log(moment(new Date()).format('YYYY/MM/DD HH:mm:ss'));
 // console.log(moment(date).format('YYYY/MM/DD HH:mm:ss'));
 ;
-parser.parse_weijizhang_xls(add);
 
 
+
+fs.readdir('/Users/henry/softtmp/weijizhangtmp',function(err,files){
+  if(err){
+    console.log(err);
+    return;
+  }
+  files.forEach(function(filename){
+    console.log('文件名：'+filename);
+    // parser.parse_weijizhang_xls(add);
+
+  });
+})
